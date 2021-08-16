@@ -1,4 +1,5 @@
-import { GetterTree, ActionTree, MutationTree } from 'vuex'
+// eslint-disable-next-line import/named
+import { GetterTree, MutationTree, ActionTree } from 'vuex'
 
 export const state = () => ({
   things: [] as string[],
@@ -16,9 +17,9 @@ export const mutations: MutationTree<RootState> = {
 }
 
 export const actions: ActionTree<RootState, RootState> = {
-  async fetchThings({ commit }) {
-    const things = await this.$axios.$get('/things')
-    console.log(things)
+  fetchThings({ commit }) {
+    // const things = await this.$axios.$get('/things')
+    // console.log(things)
     commit('CHANGE_NAME', 'New name')
   },
 }

@@ -1,10 +1,10 @@
 <template>
-$END$
+  <div>Search</div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
-name: "Search"
+  name: "Search"
 }
 </script>
 

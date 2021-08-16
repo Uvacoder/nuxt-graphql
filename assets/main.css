@@ -1,0 +1,3 @@
+.btn.no-uppercase {
+  text-transform: unset !important;
+}

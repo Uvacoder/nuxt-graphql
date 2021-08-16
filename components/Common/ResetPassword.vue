@@ -1,10 +1,10 @@
 <template>
-$END$
+<div>ResetPassword</div>
 </template>
 
 <script>
 export default {
-name: "ResetPassword"
+  name: "ResetPassword"
 }
 </script>
 
