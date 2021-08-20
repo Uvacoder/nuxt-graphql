@@ -27,14 +27,17 @@
           </v-btn>
         </template>
         <v-list>
-          <v-list-item @click="openRightDrawer('account')">
-            <v-list-item-title>Account</v-list-item-title>
-          </v-list-item>
           <v-list-item @click="openRightDrawer('login')">
             <v-list-item-title>Login</v-list-item-title>
           </v-list-item>
           <v-list-item @click="openRightDrawer('register')">
             <v-list-item-title>Register</v-list-item-title>
+          </v-list-item>
+          <v-list-item @click="openRightDrawer('account')">
+            <v-list-item-title>Account</v-list-item-title>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-title>Logout</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -44,7 +47,7 @@
       <Login v-if="type === 'login'" class-props="row align-center justify-center fill-height pa-1">
         <template #login-links>
           <v-col cols="12" class="py-0">
-            <v-btn small rounded text block class="my-2" @click="type = 'forget-password'">
+            <v-btn small rounded text block class="my-2 text-capitalize" @click="type = 'forget-password'">
               Forgot Password?
             </v-btn>
             <v-btn small rounded block depressed color="primary" @click="type = 'register'">
@@ -56,17 +59,24 @@
       <Register v-if="type === 'register'" class-props="row align-center justify-center fill-height pa-1">
         <template #register-links>
           <v-col cols="12" class="py-2">
-            <v-btn small rounded text block depressed color="primary" @click="type = 'login'">
+            <v-btn small rounded text block depressed class="text-capitalize" @click="type = 'login'">
               Have an account? Login now
             </v-btn>
           </v-col>
         </template>
       </Register>
-      <ForgetPassword v-if="type === 'forget-password'"/>
-      <ResetPassword v-if="type === 'reset-password'"/>
+      <ForgetPassword v-if="type === 'forget-password'" class-props="row align-center justify-center fill-height pa-1" @reset-password-event="type = $event">
+        <template #forget-password-form>
+          <v-col cols="12" class="py-2">
+            <v-btn small rounded text block depressed class="text-capitalize" @click="type = 'login'">
+              Return to login
+            </v-btn>
+          </v-col>
+        </template>
+      </ForgetPassword>
+      <ResetPassword v-if="type === 'reset-password'" class-props="row align-center justify-center fill-height pa-1"/>
       <Account v-if="type === 'account'"/>
       <Search v-if="type === 'search'"/>
-
     </v-navigation-drawer>
     <v-footer absolute app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
@@ -125,7 +135,6 @@ export default {
   },
   data() {
     return {
-      class : 'row align-center justify-center fill-height pa-1',
       type: 'search',
       drawer: false,
       items: [
@@ -133,11 +142,6 @@ export default {
           icon: 'mdi-apps',
           title: 'Welcome',
           to: '/'
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
         }
       ],
       rightDrawer: false,
